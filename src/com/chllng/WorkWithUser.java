@@ -33,7 +33,7 @@ public class WorkWithUser {
                 }
 
                 case 2:{
-                    System.out.println("You made " + day.getTodaysTotal(day.getDayReport()) + " push-ups. Keep Going!\n");
+                    System.out.println("You made " + day.getTodaysTotal(day.getDayReport())[0] + " push-ups in " + WorkWithFile.getTodaysTotal(day.getDayReport())[1] + " repeats. Keep Going!\n");
                     break;
                 }
 
@@ -55,13 +55,19 @@ public class WorkWithUser {
         if(directory.isDirectory()) {
             File[] allDays = directory.listFiles();
             int sum = 0;
+            int repeats = 0;
             if(allDays != null) {
 
                 for(int i = 0; i < allDays.length; i++) {
-                    System.out.println(allDays[i].getName() + ":  " + WorkWithFile.getTodaysTotal(allDays[i]));
-                    sum += WorkWithFile.getTodaysTotal(allDays[i]);
+                    System.out.println(allDays[i].getName() + ":  " + WorkWithFile.getTodaysTotal(allDays[i])[0]);
+                    sum += Integer.parseInt(WorkWithFile.getTodaysTotal(allDays[i])[0]);
+                    repeats += Integer.parseInt(WorkWithFile.getTodaysTotal(allDays[i])[1]);
                 }
-                System.out.println("You made " + sum + " push-ups in " + allDays.length + " days. Keep going!\n");
+                System.out.println("\nYou made " + sum + " push-ups in " + allDays.length + " days. Keep going!\n");
+                System.out.println("Average amount of push-ups per day: " + sum / allDays.length + "");
+                System.out.println("Average amount of push-ups per repeat: " + sum / repeats + "");
+                System.out.println("You need to do " + (10000 - sum) + " more push-ups in " + (30 - allDays.length) + " days to complete the challenge");
+                System.out.println("It's " + (10000 - sum) / (30 - allDays.length) + " push-ups per day\n");
             }
 
         } else {

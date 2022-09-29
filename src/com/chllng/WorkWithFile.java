@@ -30,22 +30,30 @@ public class WorkWithFile extends CreatePushPerDay {
         }
     }
 
-    public static int getTodaysTotal(File tempDay){
+    public static String[] getTodaysTotal(File tempDay){
         int i = 0;
+        int repeats = 0;
+        String[] totalDay = new String[2];
 
         try {
             FileReader f1 = new FileReader(tempDay);
             Scanner scanner = new Scanner(f1);
             while(scanner.hasNextInt()){
                 i += scanner.nextInt();
+                repeats ++;
                 //System.out.println(i);
             }
             f1.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return i;
+
+        totalDay[0] = String.valueOf(i);
+        totalDay[1] = String.valueOf(repeats);
+        return totalDay;
     }
+
+
 
 
 
